@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div id="app"> Alice {{ isActive === 'active' ? 'is Active' : 'not Active' }} </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"> </script>
+
+    <script>
+
+        let vm = new Vue({
+
+            el: '#app',
+            data:{
+
+                isActive: 'not active'
+
+            },
+
+            watch: {
+
+                isActive: function(newValue){
+
+                    console.log('sending an email to ' + newValue)
+                }
+            }
+
+        })
+
+    </script>
+
+</html>

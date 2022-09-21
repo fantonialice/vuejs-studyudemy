@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="eng">
+    <head> 
+        
+
+
+    </head>
+    <body>
+        <div class="container">
+
+            <div id="app">
+
+                <form action="">
+                    
+                    <div class="col-sm-6">
+
+
+                    </div>
+
+                    <fieldset class="form-group">
+                        <legend>Ratio Buttons</legend>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input v-model="options" type="checkbox" class="form-check-input" name="ptionsRadios" value="option 1" checked>
+                                Option one is this and that&mdash;be sure to include why it's great
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input v-model="options" type="checkbox" class="form check input" name="optionsRadios" id="optionsRadios2" value="option 2"> Option two can be something else and selecting it will deselect option one
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input v-model="options" type="checkbox" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option 3">Option three is disabled
+                            </label>
+                        </div>
+                    </fieldset>
+                    <p> You selected {{options.join(', ')}} </p>
+                </form>
+
+            </div>
+
+        </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+
+    let vm = new Vue({
+
+        el: '#app',
+        data: {
+            options: [],
+            message: ''
+        }
+
+    })
+
+</script>
+
+
+    </body>
+</html>

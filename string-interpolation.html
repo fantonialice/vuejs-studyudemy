@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div id="app">
+        
+        <h1 :data="name"> nome: {{ name}}</h1>
+        <h1 :data="age"> idade: {{ age }}</h1> 
+        <h1>{{ isActive ? 'is Active' : 'is not Active' }} </h1>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"> </script>
+
+    <script>
+
+        let vm = new Vue({
+            el: '#app',
+            data:{
+                name: 'Alice',
+                age: 18,
+                isActive: true
+            }
+        })
+
+    </script>
+
+</html>
