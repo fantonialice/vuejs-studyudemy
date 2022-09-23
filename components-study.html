@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <style type="text/css">
+            .user{
+            border: 3px solid #ccc;
+            background-color: white;
+            padding: 10px;
+            }
+        </style>
+
+    </head>
+    <body>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <div id ="app">
+        <p>{{ title }}</p>
+        <hr> 
+        <app-user></app-user>
+      
+      </div>
+
+    <script>
+
+        Vue.component('app-user', {
+            data: function(){
+                return {
+                    users: [
+                    {username: 'Fan'},
+                    {username: 'Claire'},
+                    {username: 'Louise'}
+                ]
+                }
+            },
+            template: '<div><div class="user" v-for="user in users"><p> Username: {{ user.username }} </p></div></div>'
+
+        });
+
+
+        new Vue({
+
+            el: "#app",
+            data:{
+                title: 'Hello World',
+                
+
+            }
+
+        })
+
+    </script>
+
+    </body>
+</html>
