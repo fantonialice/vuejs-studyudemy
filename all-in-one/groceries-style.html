@@ -1,0 +1,194 @@
+<html>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/some-nice-basic-css/global.css" />
+    <style>
+
+        body, html{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+        .button{
+            display: inline-block;
+            outline: none;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 14px 24px;
+            border: none;
+            transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
+            background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
+            color: #fff;
+        }
+
+        .input {
+            line-height: 28px;
+            border: 2px solid transparent;
+            border-bottom-color: #777;
+            padding: .2rem 0;
+            outline: none;
+            background-color: transparent;
+            color: #0d0c22;
+            transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .input:focus, input:hover {
+            outline: none;
+            padding: .2rem 1rem;
+            border-radius: 1rem;
+            border-color: #0d0c22;
+        }
+
+        .input::placeholder {
+            color: #777;
+        }
+
+        .input:focus::placeholder {
+            opacity: 0;
+            transition: opacity .3s;
+        }
+
+        .itemsList{
+            font-size: 18px;
+            font-family: 'georgia';
+            font-weight: bold;
+        }
+
+
+        .stats{
+
+            display: inline-block;
+            outline: none;
+            border-width: 0px;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: inherit;
+            font-weight: 500;
+            max-width: 100%;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.1s ease-out 0s, box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38) 0s;
+            background: #091e420a;
+            height: 32px;
+            line-height: 32px;
+            padding: 0px 12px;
+            vertical-align: middle;
+            width: auto;
+            font-size: 14px;
+            color: #42526e;
+            margin-left: 50px;
+        }
+
+        .items{
+            color: rgb(0, 0, 0);
+        }
+
+        .notChecked{
+            text-decoration: none;
+        }
+        .checked{
+            text-decoration: line-through;
+        }
+
+    </style>
+
+    <head>
+        
+        <script src="https://unpkg.com/vue@3"></script>
+    </head>
+    
+    <body>
+        <div id="app">
+            
+            <ol v-if="hasItems" class="itemsList">
+                <li v-for="item in items" v-bind:key="item.id">
+                    <input type="checkbox" v-model="item.checked" v-on:change="newItemBought">
+                    <label class="items" :class="[ item.checked ? 'checked' : 'notChecked' ]">
+                        {{ item.name }}
+                    </label>
+                    
+                </li>
+            </ol>
+            <p v-else> List is empty</p>
+            <form v-on:submit.prevent="addItem"> Add Item:
+                <input placeholder="item" class="input" required="" type="text" v-model="newItem">
+            </form>
+            
+            <p v-show="hasItems" class="stats">
+                {{ totalItemsToBuyMessage }}
+            </p> <br>
+            <p v-show="hasItems" class="stats">
+                {{ totalItemsBoughtMessage }}
+            </p> <br>
+            <p v-show="hasItems" class="stats">
+                {{ totalAmountMessage }}
+            </p> 
+            
+        </div>
+
+        <script>
+            Vue.createApp({
+                data(){
+                    return {
+                        newItem: '',
+                        items:[],
+                        itemsBought: []
+                    }
+                },
+
+                computed: {
+                    totalAmountOfItems(){
+                        return this.items.length
+                    },
+                    totalAmountMessage(){
+                        if (this.totalAmountOfItems == 1){
+                            return `1 item in the list`
+                        }
+                        return `${this.totalAmountOfItems} items in the list`
+                    },
+                    totalItemsBought(){
+                        return this.itemsBought.length
+                    },
+                    totalItemsBoughtMessage(){
+                        if (this.totalItemsBought == 1){
+                            return `1 item bought`
+                        }
+                        return `${this.totalItemsBought} items bought`
+                    },
+                    totalItemsToBuy(){
+                        return (this.items.length - this.totalItemsBought)
+                    },
+                    totalItemsToBuyMessage(){
+                        if (this.totalItemsToBuy == 1){
+                            return `1 item to buy`
+                        }
+                        return `${this.totalItemsToBuy} items to buy`
+                    },
+                    hasItems(){
+                        return this.totalAmountOfItems !== 0
+                    }
+                },
+
+                methods: {
+                    addItem(){
+                        this.items.push({
+                            id: Math.random(),
+                            name: this.newItem,
+                            checked: false
+                        })
+                        this.newItem = ''
+                    },
+                    newItemBought(){
+                        this.itemsBought.push({
+                            name: this.newItem
+                        })
+                        this.newItem = ''
+                    },
+                }
+            }).mount('#app')
+        </script>
+    </body>
+</html>
